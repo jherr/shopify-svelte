@@ -1,7 +1,7 @@
 import type { FetchFunc } from './types.d';
 import { gqlQuery } from '../lib/gqlQuery';
 
-const collectionQueryGQL = `query CollectionDetails($handle: String!, $country: CountryCode, $numProducts: Int!, $numProductMetafields: Int = 0, $numProductVariants: Int = 250, $numProductMedia: Int = 6, $numProductVariantMetafields: Int = 0, $numProductVariantSellingPlanAllocations: Int = 0, $numProductSellingPlanGroups: Int = 0, $numProductSellingPlans: Int = 0) @inContext(country: $country) {
+const collectionQueryGQL = `query CollectionDetails($handle: String!, $country: CountryCode, $numProducts: Int!, $numProductMetafields: Int = 0, $numProductVariants: Int = 0, $numProductMedia: Int = 1, $numProductVariantMetafields: Int = 0, $numProductVariantSellingPlanAllocations: Int = 0, $numProductSellingPlanGroups: Int = 0, $numProductSellingPlans: Int = 0) @inContext(country: $country) {
   collection(handle: $handle) {
     id
     title
@@ -395,7 +395,7 @@ interface Product {
 	pageInfo: PageInfo;
 }
 
-interface Collection {
+export interface CollectionQueryResult {
 	id: string;
 	title: string;
 	descriptionHtml: string;
@@ -407,7 +407,7 @@ export const collectionQuery = (
 	handle: string,
 	numProducts = 20,
 	country = 'US'
-): Promise<Collection> =>
+): Promise<CollectionQueryResult> =>
 	gqlQuery(fetch, collectionQueryGQL, {
 		numProducts,
 		country,

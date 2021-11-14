@@ -2,7 +2,7 @@
   "name": "shopify-svelte",
   "version": "0.0.1",
   "scripts": {
-    "dev:only": "svelte-kit dev --port 3030",
+    "dev:only": "svelte-kit dev",
     "build:only": "svelte-kit build",
     "preview": "svelte-kit preview",
     "tailwind:watch": "cross-env TAILWIND_MODE=watch cross-env NODE_ENV=development postcss src/styles/tailwind.css -o src/styles/tailwind-output.css -w",
